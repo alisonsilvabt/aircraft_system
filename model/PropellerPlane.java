@@ -16,4 +16,9 @@ public class PropellerPlane extends Aircraft {
     public void setMaxAltitude(int maxAltitude) {
         this.maxAltitude = maxAltitude;
     }
+
+    public double getPricePerHour() {
+        double pricePerHour = super.getPricePerHour();
+        return pricePerHour * 1.03; // 3% de imposto
+    }
 }

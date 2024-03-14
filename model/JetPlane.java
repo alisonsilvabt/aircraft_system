@@ -16,4 +16,9 @@ public class JetPlane extends Aircraft {
     public void setMaxSpeed(int maxSpeed) {
         this.maxSpeed = maxSpeed;
     }
+
+    public double getPricePerHour() {
+        double pricePerHour = super.getPricePerHour();
+        return pricePerHour * 1.2; // 20% de imposto
+    }
 }

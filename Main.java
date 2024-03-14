@@ -7,6 +7,8 @@ import java.util.Scanner;
 import controller.AircraftController;
 import controller.RentalTransactionController;
 import model.Aircraft;
+import model.JetPlane;
+import model.PropellerPlane;
 import model.RentalTransaction;
 import view.AircraftView;
 import view.RentalTransactionView;
@@ -61,25 +63,51 @@ public class Main {
         System.out.println("Sistema encerrado.");
     }
 
-    private static void registerNewAircraft() {
-        System.out.println("=== Cadastro de Nova Aeronave ===");
-        System.out.print("Modelo: ");
-        String model = scanner.nextLine();
-        System.out.print("Fabricante: ");
-        String manufacturer = scanner.nextLine();
-        System.out.print("Ano de Fabricação: ");
-        int year = scanner.nextInt();
-        System.out.print("Capacidade de Passageiros: ");
-        int capacity = scanner.nextInt();
-        System.out.print("Autonomia de Voo(Km): ");
-        int autonomy = scanner.nextInt();
-        System.out.print("Preço por Hora de Voo(R$): ");
-        double pricePerHour = scanner.nextDouble();
+private static void registerNewAircraft() {
+    System.out.println("=== Cadastro de Nova Aeronave ===");
+    System.out.print("Modelo: ");
+    String model = scanner.nextLine();
+    System.out.print("Fabricante: ");
+    String manufacturer = scanner.nextLine();
+    System.out.print("Ano de Fabricação: ");
+    int year = scanner.nextInt();
+    System.out.print("Capacidade de Passageiros: ");
+    int capacity = scanner.nextInt();
+    System.out.print("Autonomia de Voo(Km): ");
+    int autonomy = scanner.nextInt();
+    System.out.print("Preço por Hora de Voo(R$): ");
+    double pricePerHour = scanner.nextDouble();
 
-        Aircraft newAircraft = new Aircraft(model, manufacturer, year, capacity, autonomy, pricePerHour);
-        aircraftController.addAircraft(newAircraft);
-        System.out.println("Aeronave cadastrada com sucesso.");
+    // Exibir opções de tipo de aeronave
+    System.out.println("Selecione o tipo de aeronave:");
+    System.out.println("1. Avião a Jato");
+    System.out.println("2. Avião a Hélice");
+    System.out.print("Opção: ");
+    int option = scanner.nextInt();
+    scanner.nextLine(); 
+
+    Aircraft newAircraft;
+    switch (option) {
+        case 1:
+            System.out.println("Digite a velocidade máxima do avião: ");
+            int fast = scanner.nextInt();
+            scanner.nextLine();
+            newAircraft = new JetPlane(model, manufacturer, year, capacity, autonomy, pricePerHour, fast);
+            break;
+        case 2:
+            System.out.println("Digite a altitude máxima do avião: ");
+            int maxAltitude = scanner.nextInt();
+            scanner.nextLine();
+            newAircraft = new PropellerPlane(model, manufacturer, year, capacity, autonomy, pricePerHour, maxAltitude);
+            break;
+        default:
+            System.out.println("Opção inválida. Aeronave cadastrada como Avião Genérico.");
+            newAircraft = new Aircraft(model, manufacturer, year, capacity, autonomy, pricePerHour);
+            break;
+        }
+    aircraftController.addAircraft(newAircraft);    
     }
+
 
     private static void listAvailableAircrafts() {
         System.out.println("=== Aeronaves Disponíveis ===");
@@ -147,9 +175,6 @@ public class Main {
         scanner.nextLine();
         System.out.print("Data do aluguel (formato yyyy-MM-dd HH:mm): ");
         String rentalDateStr = scanner.nextLine();
-        System.out.print("Duração do aluguel (em horas): ");
-        int rentalDurationHours = scanner.nextInt();
-        scanner.nextLine();
 
         Date rentalDate;
         try {
@@ -159,6 +184,12 @@ public class Main {
             System.out.println("Formato de data inválido. Use o formato yyyy-MM-dd HH:mm.");
             return;
         }
+        
+        System.out.print("Duração do aluguel (em horas): ");
+        int rentalDurationHours = scanner.nextInt();
+        scanner.nextLine();
+
+
 
         RentalTransaction rentalTransaction = new RentalTransaction(aircraft, rentalDate, rentalDurationHours);
         rentalTransactionController.addRentalTransaction(rentalTransaction);

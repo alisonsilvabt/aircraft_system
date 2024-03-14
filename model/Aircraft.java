@@ -7,7 +7,7 @@ public class Aircraft {
     private int year;
     private int capacity;
     private int autonomy;
-    private double pricePerHour;
+    private double pricePerHour; //encapsulamento
 
     public Aircraft(String model, String manufacturer, int year, int capacity, int autonomy, double pricePerHour) {
         this.model = model;
@@ -17,8 +17,6 @@ public class Aircraft {
         this.autonomy = autonomy;
         this.pricePerHour = pricePerHour;
     }
-
-    // Getters e Setters para os atributos da aeronave
 
     public String getModel() {
         return model;
@@ -69,7 +67,7 @@ public class Aircraft {
     }
 
     public double getPricePerHour() {
-        return pricePerHour;
+        return pricePerHour * 1.1; //10% de imposto
     }
 
     public void setPricePerHour(double pricePerHour) {

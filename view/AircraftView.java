@@ -22,11 +22,12 @@ public class AircraftView {
     // Método utilitário para converter os detalhes de uma aeronave em uma string
     // formatada
     private String aircraftDetailsToString(Aircraft aircraft) {
-        return "Model: " + aircraft.getModel() +
+        return "Id: " + aircraft.getId() +
+                ", Model: " + aircraft.getModel() +
                 ", Manufacturer: " + aircraft.getManufacturer() +
                 ", Year: " + aircraft.getYear() +
                 ", Capacity: " + aircraft.getCapacity() +
                 ", Autonomy: " + aircraft.getAutonomy() +
-                ", Price per Hour: $" + aircraft.getPricePerHour();
+                ", Price per Hour: R$" + aircraft.getPricePerHour();
     }
 }
